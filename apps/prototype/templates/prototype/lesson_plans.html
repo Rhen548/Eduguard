@@ -1,0 +1,447 @@
+
+{% extends "prototype/base.html" %}
+
+
+<!-- ===================================================== -->
+<!-- PAGE HEADER: ACTION BUTTONS                           -->
+<!-- ===================================================== -->
+
+{% block heading_actions %}
+
+    <!-- Export Sample Lesson Plans CSV -->
+    <button
+        type="button"
+        class="button button-light"
+        data-export="lesson_plans"
+    >
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+        Export sample CSV
+    </button>
+
+
+    <!-- Open Lesson Plan Submission Modal -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-open-modal="lessonModal"
+    >
+        <svg class="icon">
+            <use href="#i-plus"></use>
+        </svg>
+
+        Submit lesson plan
+    </button>
+
+{% endblock %}
+
+
+
+<!-- ===================================================== -->
+<!-- MAIN LESSON PLAN PAGE CONTENT                         -->
+<!-- ===================================================== -->
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: LESSON PLAN SUMMARY CARDS              -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- Approved Lesson Plans -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Approved</small>
+                <strong>18</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Lesson Plans for Review -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-indigo">
+                <svg class="icon">
+                    <use href="#i-clock"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>For Review</small>
+                <strong>7</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Missing or Overdue Lesson Plans -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-amber">
+                <svg class="icon">
+                    <use href="#i-alert"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Missing / Overdue</small>
+                <strong>3</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: WEEKLY LESSON PLANS TABLE              -->
+    <!-- ================================================= -->
+
+    <div class="surface-card table-card">
+
+
+        <!-- Table Header -->
+        <div class="card-header">
+
+            <div>
+                <h3>Weekly Lesson Plans</h3>
+
+                <p>
+                    Monitor instructional submissions from teachers
+                </p>
+            </div>
+
+            <span class="mini-pill">
+                Week 7 • Oct 2026
+            </span>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- SEARCH AND STATUS FILTER                      -->
+        <!-- ============================================= -->
+
+        <div class="toolbar">
+
+
+            <!-- Search Lesson Plans -->
+            <label class="search-field">
+
+                <svg class="icon">
+                    <use href="#i-search"></use>
+                </svg>
+
+                <input
+                    data-filter-search="lessonTable"
+                    placeholder="Search title, subject, teacher..."
+                    aria-label="Search lesson plans"
+                >
+
+            </label>
+
+
+
+            <!-- Filter Lesson Plans by Status -->
+            <select
+                class="select-input"
+                data-filter-select="lessonTable"
+                data-filter-field="status"
+                aria-label="Filter lesson plan status"
+            >
+
+                <option value="">All statuses</option>
+                <option>Approved</option>
+                <option>For Review</option>
+                <option>Missing</option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- LESSON PLANS DATA TABLE                       -->
+        <!-- ============================================= -->
+
+        <div class="table-overflow">
+
+            <table
+                class="data-table"
+                id="lessonTable"
+            >
+
+                <!-- Table Column Headings -->
+                <thead>
+
+                    <tr>
+                        <th>LESSON PLAN</th>
+                        <th>SUBJECT</th>
+                        <th>TEACHER</th>
+                        <th>WEEK</th>
+                        <th>SUBMITTED</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- Lesson Plan Records -->
+                <tbody>
+
+                    {% for plan in plans %}
+
+                        <tr
+                            data-status="{{ plan.status }}"
+                            data-search="{{ plan.title|lower }} {{ plan.subject|lower }} {{ plan.teacher|lower }}"
+                        >
+
+
+                            <!-- Lesson Plan Title -->
+                            <td>
+                                <strong>
+                                    {{ plan.title }}
+                                </strong>
+                            </td>
+
+
+
+                            <!-- Subject -->
+                            <td>
+                                {{ plan.subject }}
+                            </td>
+
+
+
+                            <!-- Teacher Name -->
+                            <td>
+                                {{ plan.teacher }}
+                            </td>
+
+
+
+                            <!-- Week -->
+                            <td>
+                                {{ plan.week }}
+                            </td>
+
+
+
+                            <!-- Submission Date -->
+                            <td>
+                                {{ plan.submitted }}
+                            </td>
+
+
+
+                            <!-- Lesson Plan Status -->
+                            <td>
+
+                                <span
+                                    class="status {% if plan.status == 'Approved' %}status-approved{% elif plan.status == 'Missing' %}status-high{% else %}status-review{% endif %}"
+                                >
+                                    {{ plan.status }}
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- Review Action -->
+                            <td>
+
+                                <button
+                                    class="button-link"
+                                    type="button"
+                                    data-toast="Lesson plan preview selected. File review becomes available in the full system."
+                                >
+                                    Review →
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+
+            <!-- Message When No Records Match -->
+            <div
+                class="empty-state"
+                data-empty-for="lessonTable"
+                hidden
+            >
+                No matching lesson plans.
+            </div>
+
+        </div>
+
+
+
+        <!-- Table Footer -->
+        <div class="table-bottom">
+
+            Showing
+
+            <strong data-visible-count="lessonTable">
+                6
+            </strong>
+
+            example lesson plans
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: LESSON PLAN SUBMISSION MODAL           -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal-backdrop"
+        id="lessonModal"
+        hidden
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="lessonTitle"
+        >
+
+
+            <!-- ========================================= -->
+            <!-- MODAL HEADER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-header">
+
+                <h3 id="lessonTitle">
+                    Lesson Plan Submission Preview
+                </h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL BODY                                -->
+            <!-- ========================================= -->
+
+            <div class="modal-body">
+
+
+                <!-- Lesson Plan Title Input -->
+                <label class="form-label">
+
+                    Lesson plan title
+
+                    <input
+                        class="text-input"
+                        type="text"
+                        id="lessonDemoTitle"
+                        placeholder="e.g., Introduction to Fractions"
+                    >
+
+                </label>
+
+
+
+                <!-- Example Document Upload -->
+                <label class="form-label">
+
+                    Select example document
+
+                    <input
+                        class="text-input file-field"
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        id="lessonDemoFile"
+                    >
+
+                </label>
+
+
+
+                <!-- Prototype Disclaimer -->
+                <p class="modal-tip">
+                    Files are not uploaded in prototype mode.
+                    Submission and review workflows will be
+                    connected to secure storage later.
+                </p>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL FOOTER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-footer">
+
+
+                <!-- Cancel Button -->
+                <button
+                    type="button"
+                    class="button button-light"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+
+                <!-- Preview Submission Button -->
+                <button
+                    type="button"
+                    class="button button-primary"
+                    data-demo-submit="lesson"
+                >
+                    Preview submission
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

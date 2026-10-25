@@ -1,0 +1,574 @@
+
+{% extends "prototype/base.html" %}
+
+
+<!-- ===================================================== -->
+<!-- PAGE HEADER: ACTION BUTTON                            -->
+<!-- ===================================================== -->
+
+{% block heading_actions %}
+
+    <!-- Open the Record Intervention modal -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-open-modal="interventionModal"
+    >
+        <svg class="icon">
+            <use href="#i-plus"></use>
+        </svg>
+
+        Record intervention
+    </button>
+
+{% endblock %}
+
+
+
+<!-- ===================================================== -->
+<!-- MAIN INTERVENTION MANAGEMENT CONTENT                  -->
+<!-- ===================================================== -->
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: INTERVENTION SUMMARY CARDS             -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- Pending Follow-ups -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-amber">
+                <svg class="icon">
+                    <use href="#i-clock"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Pending Follow-ups</small>
+                <strong>2</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- In Progress -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-indigo">
+                <svg class="icon">
+                    <use href="#i-heart"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>In Progress</small>
+                <strong>2</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Resolved Cases -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Resolved Cases</small>
+                <strong>1</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: INTERVENTION WORKFLOW HEADER           -->
+    <!-- ================================================= -->
+
+    <section class="section-head">
+
+        <div>
+            <h3>Intervention Workflow</h3>
+
+            <p>
+                Follow each concern from initial action to resolution.
+            </p>
+        </div>
+
+        <span class="mini-pill">
+            Sample Kanban view
+        </span>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: KANBAN BOARD                           -->
+    <!-- ================================================= -->
+
+    <div class="kanban">
+
+
+        <!-- ============================================= -->
+        <!-- COLUMN 1: TO DO                               -->
+        <!-- ============================================= -->
+
+        <div class="kanban-column">
+
+
+            <!-- Column Heading -->
+            <div class="kanban-heading">
+
+                <span
+                    class="kanban-dot"
+                    style="background:#f7b260"
+                ></span>
+
+                <h3>To Do</h3>
+
+                <span>2</span>
+
+            </div>
+
+
+
+            <!-- Loop through intervention records -->
+            {% for item in interventions %}
+
+                <!-- Display only To Do interventions -->
+                {% if item.status == 'To Do' %}
+
+                    <div class="kanban-card">
+
+
+                        <!-- Case ID and Status -->
+                        <div class="kanban-card-top">
+
+                            <span class="case-id">
+                                {{ item.case }}
+                            </span>
+
+                            <span class="status status-moderate">
+                                Pending
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Student Name -->
+                        <h4>
+                            {{ item.name }}
+                        </h4>
+
+
+
+                        <!-- Grade and Intervention Type -->
+                        <p>
+                            {{ item.grade }} · {{ item.type }}
+                        </p>
+
+
+
+                        <!-- Intervention Notes -->
+                        <div class="kanban-note">
+                            {{ item.notes }}
+                        </div>
+
+
+
+                        <!-- Date and Action Button -->
+                        <div class="kanban-card-footer">
+
+                            <span>
+                                <svg class="icon">
+                                    <use href="#i-calendar"></use>
+                                </svg>
+
+                                {{ item.date }}
+                            </span>
+
+                            <button
+                                type="button"
+                                class="button-link"
+                                data-toast="Follow-up updates will save when the final database is available."
+                            >
+                                Open →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- COLUMN 2: IN PROGRESS                         -->
+        <!-- ============================================= -->
+
+        <div class="kanban-column">
+
+
+            <!-- Column Heading -->
+            <div class="kanban-heading">
+
+                <span
+                    class="kanban-dot"
+                    style="background:#6e8dfe"
+                ></span>
+
+                <h3>In Progress</h3>
+
+                <span>2</span>
+
+            </div>
+
+
+
+            <!-- Loop through intervention records -->
+            {% for item in interventions %}
+
+                <!-- Display only In Progress interventions -->
+                {% if item.status == 'In Progress' %}
+
+                    <div class="kanban-card">
+
+
+                        <!-- Case ID and Status -->
+                        <div class="kanban-card-top">
+
+                            <span class="case-id">
+                                {{ item.case }}
+                            </span>
+
+                            <span class="status status-review">
+                                Active
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Student Name -->
+                        <h4>
+                            {{ item.name }}
+                        </h4>
+
+
+
+                        <!-- Grade and Intervention Type -->
+                        <p>
+                            {{ item.grade }} · {{ item.type }}
+                        </p>
+
+
+
+                        <!-- Intervention Notes -->
+                        <div class="kanban-note">
+                            {{ item.notes }}
+                        </div>
+
+
+
+                        <!-- Date and Action Button -->
+                        <div class="kanban-card-footer">
+
+                            <span>
+                                <svg class="icon">
+                                    <use href="#i-calendar"></use>
+                                </svg>
+
+                                {{ item.date }}
+                            </span>
+
+                            <button
+                                type="button"
+                                class="button-link"
+                                data-toast="Follow-up updates will save when the final database is available."
+                            >
+                                Open →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- COLUMN 3: RESOLVED                            -->
+        <!-- ============================================= -->
+
+        <div class="kanban-column">
+
+
+            <!-- Column Heading -->
+            <div class="kanban-heading">
+
+                <span
+                    class="kanban-dot"
+                    style="background:#35bb9b"
+                ></span>
+
+                <h3>Resolved</h3>
+
+                <span>1</span>
+
+            </div>
+
+
+
+            <!-- Loop through intervention records -->
+            {% for item in interventions %}
+
+                <!-- Display only Resolved interventions -->
+                {% if item.status == 'Resolved' %}
+
+                    <div class="kanban-card">
+
+
+                        <!-- Case ID and Status -->
+                        <div class="kanban-card-top">
+
+                            <span class="case-id">
+                                {{ item.case }}
+                            </span>
+
+                            <span class="status status-low">
+                                Resolved
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Student Name -->
+                        <h4>
+                            {{ item.name }}
+                        </h4>
+
+
+
+                        <!-- Grade and Intervention Type -->
+                        <p>
+                            {{ item.grade }} · {{ item.type }}
+                        </p>
+
+
+
+                        <!-- Intervention Notes -->
+                        <div class="kanban-note">
+                            {{ item.notes }}
+                        </div>
+
+
+
+                        <!-- Date and Action Button -->
+                        <div class="kanban-card-footer">
+
+                            <span>
+                                <svg class="icon">
+                                    <use href="#i-calendar"></use>
+                                </svg>
+
+                                {{ item.date }}
+                            </span>
+
+                            <button
+                                type="button"
+                                class="button-link"
+                                data-toast="Case history will become available with the full database."
+                            >
+                                History →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 4: RECORD INTERVENTION MODAL              -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal-backdrop"
+        id="interventionModal"
+        hidden
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="interventionModalTitle"
+        >
+
+
+            <!-- ========================================= -->
+            <!-- MODAL HEADER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-header">
+
+                <h3 id="interventionModalTitle">
+                    Record Intervention — Preview
+                </h3>
+
+                <button
+                    class="modal-close"
+                    type="button"
+                    data-close-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL BODY                                -->
+            <!-- ========================================= -->
+
+            <div class="modal-body">
+
+
+                <!-- Select Student -->
+                <label class="form-label">
+
+                    Sample student
+
+                    <select
+                        class="select-input full-width"
+                        id="interventionDemoStudent"
+                    >
+
+                        <option value="">
+                            Select student
+                        </option>
+
+                        <option>Jacob Bautista</option>
+                        <option>Liam Cruz</option>
+                        <option>Noah Dela Cruz</option>
+
+                    </select>
+
+                </label>
+
+
+
+                <!-- Select Support Action -->
+                <label class="form-label">
+
+                    Support action
+
+                    <select class="select-input full-width">
+
+                        <option>Guidance counseling</option>
+                        <option>Parent conference</option>
+                        <option>Academic support</option>
+                        <option>Attendance follow-up</option>
+
+                    </select>
+
+                </label>
+
+
+
+                <!-- Follow-up Notes -->
+                <label class="form-label">
+
+                    Follow-up notes
+
+                    <textarea
+                        class="text-input"
+                        rows="3"
+                        placeholder="Add a sample note..."
+                    ></textarea>
+
+                </label>
+
+
+
+                <!-- Prototype Disclaimer -->
+                <p class="modal-tip">
+                    Do not enter real student information.
+                    This prototype does not save intervention records.
+                </p>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL FOOTER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-footer">
+
+
+                <!-- Cancel Button -->
+                <button
+                    type="button"
+                    class="button button-light"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+
+                <!-- Preview Record Button -->
+                <button
+                    type="button"
+                    class="button button-primary"
+                    data-demo-submit="intervention"
+                >
+                    Preview record
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

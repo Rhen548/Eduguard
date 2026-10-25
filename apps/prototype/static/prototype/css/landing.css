@@ -1,0 +1,649 @@
+
+/* =====================================================
+   EDUGUARD LANDING PAGE
+   Julio R. Hernandez Integrated School
+
+   Clean and Responsive Version
+
+   Includes:
+   1. Global Styles
+   2. Background and Overlay
+   3. Hero Layout
+   4. School Name Badge
+   5. Typography
+   6. Sign In Button
+   7. School Logo and Tagline
+   8. Responsive Design
+   9. Accessibility
+
+   ===================================================== */
+
+
+/* =====================================================
+   1. GLOBAL STYLES
+   ===================================================== */
+
+:root {
+    --navy: #031b2e;
+    --teal: #13cfc1;
+    --white: #ffffff;
+    --text-light: #e0f0f7;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    background: var(--navy);
+    color: var(--white);
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.page-width {
+    width: min(1480px, calc(100% - 96px));
+    margin-inline: auto;
+}
+
+
+/* =====================================================
+   2. HERO AND SCHOOL BACKGROUND
+   ===================================================== */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: flex;
+    align-items: stretch;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    background: var(--navy);
+}
+
+/* Actual school photo */
+
+.hero-photo {
+    position: absolute;
+    inset: 0;
+
+    z-index: -2;
+
+    background-image: url("../images/jrh-school-campus.jpg");
+    background-size: cover;
+    background-position: center 43%;
+    background-repeat: no-repeat;
+}
+
+/* Overlay for clearer texts */
+
+.hero-wash {
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 27, 46, 0.99) 0%,
+            rgba(3, 27, 46, 0.97) 25%,
+            rgba(3, 27, 46, 0.85) 39%,
+            rgba(3, 40, 52, 0.40) 72%,
+            rgba(3, 27, 46, 0.20) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(2, 35, 49, 0.75) 0%,
+            transparent 45%
+        );
+}
+
+
+/* =====================================================
+   3. HERO LAYOUT
+   ===================================================== */
+
+.hero-inner {
+    position: relative;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0, 55%)
+        minmax(0, 45%);
+
+    align-items: center;
+
+    width: min(1480px, calc(100% - 96px));
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    margin-inline: auto;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 2;
+
+    min-width: 0;
+    max-width: 700px;
+
+    padding-block: 72px;
+}
+
+
+/* =====================================================
+   4. SCHOOL NAME BADGE
+   ===================================================== */
+
+.school-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    max-width: 100%;
+
+    padding: 11px 16px;
+
+    border: 1px solid #38d9d0;
+    border-radius: 999px;
+
+    background: rgba(1, 30, 44, 0.50);
+
+    color: white;
+
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+}
+
+.chip-dot {
+    display: inline-block;
+    flex-shrink: 0;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: #13d2c2;
+
+    box-shadow: 0 0 12px rgba(19, 210, 194, 0.8);
+}
+
+
+/* =====================================================
+   5. MAIN TITLE AND DESCRIPTION
+   ===================================================== */
+
+/* EduGuard title */
+
+.hero h1 {
+    margin: 36px 0 5px;
+
+    font-size: clamp(56px, 6.5vw, 106px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -4px;
+
+    color: white;
+}
+
+.hero h1 span {
+    color: #16d4c4;
+}
+
+/* Academic and Instructional Monitoring System */
+
+.hero h2 {
+    max-width: 640px;
+
+    margin: 0 0 26px;
+
+    font-size: clamp(27px, 2.8vw, 43px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+
+    color: white;
+}
+
+/* Description */
+
+.hero-description {
+    max-width: 570px;
+
+    margin: 0 0 34px;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* =====================================================
+   6. SIGN IN BUTTON
+   ===================================================== */
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+}
+
+.primary-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+
+    min-height: 56px;
+    padding: 15px 28px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #079f9b,
+            #10cdbc
+        );
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 750;
+    white-space: nowrap;
+
+    box-shadow:
+        0 12px 30px rgba(0, 166, 158, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.primary-action:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 17px 36px rgba(0, 166, 158, 0.30);
+
+    filter: brightness(1.07);
+}
+
+.primary-action:focus-visible {
+    outline: 3px solid #a1f5e8;
+    outline-offset: 4px;
+}
+
+
+/* =====================================================
+   7. RIGHT SIDE: SCHOOL LOGO AND TAGLINE
+   ===================================================== */
+
+.hero-art {
+    position: relative;
+
+    align-self: stretch;
+    min-width: 0;
+    min-height: 0;
+
+    pointer-events: none;
+}
+
+/* Official logo */
+
+.school-seal {
+    position: absolute;
+
+    top: 6%;
+    right: 0;
+
+    width: clamp(125px, 13vw, 190px);
+    aspect-ratio: 1;
+
+    z-index: 2;
+
+    filter:
+        drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+}
+
+.school-seal img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border: 5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+}
+
+/* Tagline */
+
+.school-quote {
+    position: absolute;
+
+    top: calc(6% + clamp(125px, 13vw, 190px) + 18px);
+    right: 5px;
+
+    z-index: 2;
+
+    padding: 9px 15px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    color: #07324a;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(17px, 1.6vw, 24px);
+    font-style: italic;
+    line-height: 1.22;
+
+    text-align: center;
+
+    transform: rotate(-5deg);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =====================================================
+   8. RESPONSIVE — SMALL DESKTOP AND LAPTOP
+   ===================================================== */
+
+@media (max-width: 1200px) {
+
+    .page-width,
+    .hero-inner {
+        width: calc(100% - 72px);
+    }
+
+    .hero-inner {
+        grid-template-columns:
+            minmax(0, 60%)
+            minmax(0, 40%);
+    }
+
+    .hero h1 {
+        font-size: clamp(55px, 6.6vw, 86px);
+    }
+
+    .hero h2 {
+        font-size: clamp(26px, 3vw, 37px);
+    }
+
+    .hero-description {
+        max-width: 510px;
+        font-size: 13px;
+    }
+
+    .school-seal {
+        width: 135px;
+    }
+
+    .school-quote {
+        top: calc(6% + 153px);
+        font-size: 17px;
+    }
+
+}
+
+
+/* =====================================================
+   9. RESPONSIVE — TABLETS
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .page-width,
+    .hero-inner {
+        width: calc(100% - 48px);
+    }
+
+    .hero-inner {
+        display: block;
+        min-height: 100svh;
+    }
+
+    .hero-copy {
+        max-width: 610px;
+        padding-top: 245px;
+        padding-bottom: 65px;
+    }
+
+    .hero h1 {
+        font-size: clamp(52px, 8vw, 77px);
+    }
+
+    .hero h2 {
+        font-size: clamp(27px, 4vw, 38px);
+    }
+
+    .hero-photo {
+        background-position: 60% center;
+    }
+
+    .hero-wash {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(3, 27, 46, 0.22) 0%,
+                rgba(3, 27, 46, 0.80) 30%,
+                rgba(3, 27, 46, 0.98) 78%
+            );
+    }
+
+    .hero-art {
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 230px;
+    }
+
+    .school-seal {
+        width: 120px;
+        top: 20px;
+        right: 5px;
+    }
+
+    .school-quote {
+        top: 153px;
+        right: 5px;
+        font-size: 16px;
+    }
+
+}
+
+
+/* =====================================================
+   10. RESPONSIVE — MOBILE PHONES
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .page-width,
+    .hero-inner {
+        width: calc(100% - 36px);
+    }
+
+    .hero-inner {
+        min-height: 100svh;
+    }
+
+    .hero-copy {
+        width: 100%;
+        max-width: none;
+
+        padding-top: 218px;
+        padding-bottom: 50px;
+    }
+
+    .hero h1 {
+        margin-top: 25px;
+
+        font-size: clamp(45px, 11vw, 64px);
+        letter-spacing: -2.5px;
+    }
+
+    .hero h2 {
+        font-size: clamp(23px, 5.7vw, 31px);
+        letter-spacing: -0.9px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .school-chip {
+        padding: 9px 12px;
+        font-size: 9px;
+    }
+
+    .school-seal {
+        width: 104px;
+        top: 16px;
+        right: 4px;
+    }
+
+    .school-quote {
+        top: 133px;
+        right: 0;
+
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    .hero-photo {
+        background-position: 60% center;
+    }
+
+    .primary-action {
+        min-height: 51px;
+        padding: 13px 22px;
+        font-size: 12px;
+    }
+
+}
+
+
+/* =====================================================
+   11. RESPONSIVE — SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 380px) {
+
+    .page-width,
+    .hero-inner {
+        width: calc(100% - 28px);
+    }
+
+    .hero-copy {
+        padding-top: 205px;
+        padding-bottom: 42px;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 12vw, 48px);
+        letter-spacing: -2px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+    .school-chip {
+        font-size: 8px;
+        gap: 7px;
+    }
+
+    .school-seal {
+        width: 90px;
+        top: 14px;
+    }
+
+    .school-quote {
+        top: 116px;
+        font-size: 12px;
+    }
+
+}
+
+
+/* =====================================================
+   12. SHORT SCREENS / LANDSCAPE ORIENTATION
+   ===================================================== */
+
+@media (min-width: 901px) and (max-height: 650px) {
+
+    .hero-copy {
+        padding-block: 35px;
+    }
+
+    .hero h1 {
+        margin-top: 22px;
+    }
+
+    .hero h2 {
+        margin-bottom: 18px;
+    }
+
+    .hero-description {
+        margin-bottom: 24px;
+    }
+
+}
+
+
+/* =====================================================
+   13. ACCESSIBILITY
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .primary-action {
+        transition: none;
+    }
+
+}

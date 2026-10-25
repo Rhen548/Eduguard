@@ -1,0 +1,572 @@
+
+{% extends "prototype/base.html" %}
+
+
+{% block heading_actions %}
+
+    <!-- ================================================= -->
+    <!-- PAGE HEADER: ACTION BUTTONS                       -->
+    <!-- ================================================= -->
+
+
+    <!-- Print the Current Reports Page -->
+    <button
+        type="button"
+        class="button button-light"
+        onclick="window.print()"
+    >
+        <svg class="icon">
+            <use href="#i-printer"></use>
+        </svg>
+
+        Print page
+    </button>
+
+
+
+    <!-- Export Sample Reports CSV -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-export="reports"
+    >
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+        Export sample CSV
+    </button>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: REPORT SUMMARY CARDS                   -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- Report Categories -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-indigo">
+                <svg class="icon">
+                    <use href="#i-chart"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Report Categories</small>
+                <strong>5</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Export Format -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Export Format</small>
+                <strong>CSV</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Print Support -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-purple">
+                <svg class="icon">
+                    <use href="#i-printer"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Print Support</small>
+                <strong>Ready</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: REPORT CENTER HEADER                   -->
+    <!-- ================================================= -->
+
+    <section class="section-head">
+
+        <div>
+
+            <h3>
+                Report Center
+            </h3>
+
+            <p>
+                Explore common reports your school may need,
+                and download sample CSV data.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: REPORT CATEGORY CARDS                  -->
+    <!-- ================================================= -->
+
+    <div class="report-grid">
+
+
+        <!-- ============================================= -->
+        <!-- REPORT 1: ACADEMIC PERFORMANCE                -->
+        <!-- ============================================= -->
+
+        <article class="surface-card report-card">
+
+
+            <!-- Report Icon -->
+            <span class="report-icon color-purple">
+
+                <svg class="icon">
+                    <use href="#i-book"></use>
+                </svg>
+
+            </span>
+
+
+
+            <!-- Report Title -->
+            <h3>
+                Academic Performance
+            </h3>
+
+
+
+            <!-- Report Description -->
+            <p>
+                Grade summaries, class averages and
+                flagged performance changes.
+            </p>
+
+
+
+            <!-- Download Academic Performance CSV -->
+            <button
+                class="button button-outline"
+                type="button"
+                data-export="grades"
+            >
+                Download example CSV
+
+                <svg class="icon">
+                    <use href="#i-down"></use>
+                </svg>
+
+            </button>
+
+        </article>
+
+
+
+        <!-- ============================================= -->
+        <!-- REPORT 2: ATTENDANCE REPORT                   -->
+        <!-- ============================================= -->
+
+        <article class="surface-card report-card">
+
+
+            <!-- Report Icon -->
+            <span class="report-icon color-teal">
+
+                <svg class="icon">
+                    <use href="#i-scan"></use>
+                </svg>
+
+            </span>
+
+
+
+            <!-- Report Title -->
+            <h3>
+                Attendance Report
+            </h3>
+
+
+
+            <!-- Report Description -->
+            <p>
+                Time-in, time-out, attendance status,
+                and sample class trends.
+            </p>
+
+
+
+            <!-- Download Attendance CSV -->
+            <button
+                class="button button-outline"
+                type="button"
+                data-export="attendance"
+            >
+                Download example CSV
+
+                <svg class="icon">
+                    <use href="#i-down"></use>
+                </svg>
+
+            </button>
+
+        </article>
+
+
+
+        <!-- ============================================= -->
+        <!-- REPORT 3: REQUIREMENT SUBMISSION              -->
+        <!-- ============================================= -->
+
+        <article class="surface-card report-card">
+
+
+            <!-- Report Icon -->
+            <span class="report-icon color-indigo">
+
+                <svg class="icon">
+                    <use href="#i-file"></use>
+                </svg>
+
+            </span>
+
+
+
+            <!-- Report Title -->
+            <h3>
+                Requirement Submission
+            </h3>
+
+
+
+            <!-- Report Description -->
+            <p>
+                Completion summaries and missing
+                or late learning requirements.
+            </p>
+
+
+
+            <!-- Download Requirements CSV -->
+            <button
+                class="button button-outline"
+                type="button"
+                data-export="requirements"
+            >
+                Download example CSV
+
+                <svg class="icon">
+                    <use href="#i-down"></use>
+                </svg>
+
+            </button>
+
+        </article>
+
+
+
+        <!-- ============================================= -->
+        <!-- REPORT 4: EARLY WARNING SUMMARY               -->
+        <!-- ============================================= -->
+
+        <article class="surface-card report-card">
+
+
+            <!-- Report Icon -->
+            <span class="report-icon color-amber">
+
+                <svg class="icon">
+                    <use href="#i-brain"></use>
+                </svg>
+
+            </span>
+
+
+
+            <!-- Report Title -->
+            <h3>
+                Early Warning Summary
+            </h3>
+
+
+
+            <!-- Report Description -->
+            <p>
+                Sample concern indicators and
+                recommended human follow-ups.
+            </p>
+
+
+
+            <!-- Download Early Warning CSV -->
+            <button
+                class="button button-outline"
+                type="button"
+                data-export="warnings"
+            >
+                Download example CSV
+
+                <svg class="icon">
+                    <use href="#i-down"></use>
+                </svg>
+
+            </button>
+
+        </article>
+
+
+
+        <!-- ============================================= -->
+        <!-- REPORT 5: INTERVENTION MONITORING             -->
+        <!-- ============================================= -->
+
+        <article class="surface-card report-card">
+
+
+            <!-- Report Icon -->
+            <span class="report-icon color-red">
+
+                <svg class="icon">
+                    <use href="#i-heart"></use>
+                </svg>
+
+            </span>
+
+
+
+            <!-- Report Title -->
+            <h3>
+                Intervention Monitoring
+            </h3>
+
+
+
+            <!-- Report Description -->
+            <p>
+                Case tracking, support actions,
+                and follow-up status.
+            </p>
+
+
+
+            <!-- Download Intervention CSV -->
+            <button
+                class="button button-outline"
+                type="button"
+                data-export="interventions"
+            >
+                Download example CSV
+
+                <svg class="icon">
+                    <use href="#i-down"></use>
+                </svg>
+
+            </button>
+
+        </article>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 4: SNAPSHOT OVERVIEW                      -->
+    <!-- ================================================= -->
+
+    <div class="surface-card report-preview">
+
+
+        <!-- Snapshot Header -->
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Snapshot Overview
+                </h3>
+
+                <p>
+                    Sample school performance indicators
+                    for demonstration
+                </p>
+
+            </div>
+
+
+            <!-- Reporting Period -->
+            <span class="mini-pill">
+                October 2026
+            </span>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- SCHOOL PERFORMANCE SNAPSHOT                   -->
+        <!-- ============================================= -->
+
+        <div class="snapshot">
+
+
+            <!-- Student Population -->
+            <div>
+
+                <small>
+                    Students
+                </small>
+
+                <strong>
+                    1,248
+                </strong>
+
+
+                <!-- Student Progress Bar -->
+                <div class="progress">
+
+                    <span style="width:85%"></span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Attendance Rate -->
+            <div>
+
+                <small>
+                    Attendance
+                </small>
+
+                <strong>
+                    94.6%
+                </strong>
+
+
+                <!-- Attendance Progress Bar -->
+                <div class="progress">
+
+                    <span
+                        style="width:94.6%;background:#31baa7"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Class Average -->
+            <div>
+
+                <small>
+                    Class Average
+                </small>
+
+                <strong>
+                    85.3
+                </strong>
+
+
+                <!-- Class Average Progress Bar -->
+                <div class="progress">
+
+                    <span
+                        style="width:85.3%;background:#8091e9"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- At-risk Students -->
+            <div>
+
+                <small>
+                    At-risk students
+                </small>
+
+                <strong>
+                    28
+                </strong>
+
+
+                <!-- At-risk Progress Bar -->
+                <div class="progress">
+
+                    <span
+                        style="width:22%;background:#f2ad62"
+                    ></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 5: REPORT EXPORT INFORMATION             -->
+    <!-- ================================================= -->
+
+    <div class="info-strip">
+
+
+        <!-- Download Icon -->
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+
+
+        <!-- Prototype Export Information -->
+        <div>
+
+            <strong>
+                Report exports in the prototype
+            </strong>
+
+            <p>
+                CSV buttons download fictional sample records
+                in your browser. The final system will support
+                permission-controlled, filtered reports and
+                additional PDF/Excel exports.
+            </p>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,353 @@
+
+{% extends "prototype/base.html" %}
+
+
+{% block heading_actions %}
+
+    <!-- ================================================= -->
+    <!-- PAGE HEADER: ACTION BUTTONS                       -->
+    <!-- ================================================= -->
+
+    <!-- Download Sample Grades CSV -->
+    <button
+        type="button"
+        class="button button-light"
+        data-export="grades"
+    >
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+        Download sample CSV
+    </button>
+
+
+    <!-- Encode Grades Preview Button -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-toast="Grade editing is a preview feature. It will be activated when grading rules and the database are finalized."
+    >
+        <svg class="icon">
+            <use href="#i-plus"></use>
+        </svg>
+
+        Encode grades
+    </button>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: GRADE SUMMARY CARDS                    -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- Example Class Average -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-purple">
+                <svg class="icon">
+                    <use href="#i-book"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Example Class Average</small>
+                <strong>81.8</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Passing Students -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Passing Students (sample)</small>
+                <strong>5 / 8</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Students Needing Attention -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-amber">
+                <svg class="icon">
+                    <use href="#i-alert"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Needing Attention (sample)</small>
+                <strong>3 / 8</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: CLASS GRADEBOOK                        -->
+    <!-- ================================================= -->
+
+    <div class="surface-card table-card">
+
+
+        <!-- Gradebook Header -->
+        <div class="card-header">
+
+            <div>
+                <h3>Class Gradebook</h3>
+
+                <p>
+                    Illustrative grades only — official school grading
+                    weights have not yet been confirmed.
+                </p>
+            </div>
+
+            <span class="mini-pill">
+                1st Quarter • Preview
+            </span>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- SEARCH AND SUBJECT SELECTION                  -->
+        <!-- ============================================= -->
+
+        <div class="toolbar">
+
+
+            <!-- Search Student -->
+            <label class="search-field">
+
+                <svg class="icon">
+                    <use href="#i-search"></use>
+                </svg>
+
+                <input
+                    data-filter-search="gradeTable"
+                    placeholder="Find a student..."
+                    aria-label="Search gradebook"
+                >
+
+            </label>
+
+
+
+            <!-- Sample Subject Selection -->
+            <select
+                class="select-input"
+                aria-label="Sample subject selection"
+                id="subjectPreview"
+            >
+                <option>Mathematics — Sample</option>
+                <option>Science — Preview</option>
+                <option>English — Preview</option>
+            </select>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- STUDENT GRADES TABLE                          -->
+        <!-- ============================================= -->
+
+        <div class="table-overflow">
+
+            <table
+                class="data-table"
+                id="gradeTable"
+            >
+
+                <!-- Table Column Headings -->
+                <thead>
+
+                    <tr>
+                        <th>STUDENT</th>
+                        <th>WRITTEN WORK</th>
+                        <th>PERFORMANCE TASK</th>
+                        <th>ASSESSMENT</th>
+                        <th>DISPLAY GRADE</th>
+                        <th>REMARKS</th>
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- ===================================== -->
+                <!-- STUDENT GRADE RECORDS                 -->
+                <!-- ===================================== -->
+
+                <tbody>
+
+                    {% for row in grades %}
+
+                        <tr
+                            data-search="{{ row.name|lower }} {{ row.id|lower }}"
+                        >
+
+
+                            <!-- Student Name and Avatar -->
+                            <td>
+
+                                <span class="table-person">
+
+                                    <span class="avatar avatar-{{ forloop.counter }}">
+                                        {{ row.initials }}
+                                    </span>
+
+                                    <strong>
+                                        {{ row.name }}
+                                    </strong>
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- Written Work Grade -->
+                            <td>
+                                {{ row.ww }}
+                            </td>
+
+
+
+                            <!-- Performance Task Grade -->
+                            <td>
+                                {{ row.pt }}
+                            </td>
+
+
+
+                            <!-- Assessment Grade -->
+                            <td>
+                                {{ row.qa }}
+                            </td>
+
+
+
+                            <!-- Display Grade -->
+                            <td>
+                                <strong>
+                                    {{ row.final }}
+                                </strong>
+                            </td>
+
+
+
+                            <!-- Pass or Fail Remarks -->
+                            <td>
+
+                                <span
+                                    class="status {% if row.remarks == 'Passed' %}status-low{% else %}status-high{% endif %}"
+                                >
+                                    {{ row.remarks }}
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+
+            <!-- Message When Search Has No Results -->
+            <div
+                class="empty-state"
+                data-empty-for="gradeTable"
+                hidden
+            >
+                No student matches this search.
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- TABLE FOOTER                                 -->
+        <!-- ============================================= -->
+
+        <div class="table-bottom">
+
+            Showing
+
+            <strong data-visible-count="gradeTable">
+                8
+            </strong>
+
+            illustrative grades
+
+            <span>
+                Actual computation will follow school policy
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: GRADE COMPUTATION INFORMATION         -->
+    <!-- ================================================= -->
+
+    <div class="info-strip">
+
+
+        <!-- Information Icon -->
+        <svg class="icon">
+            <use href="#i-alert"></use>
+        </svg>
+
+
+        <!-- Grade Computation Disclaimer -->
+        <div>
+
+            <strong>
+                About grade computation
+            </strong>
+
+            <p>
+                Numbers on this page are static examples,
+                not automatically computed official grades.
+                The final version will apply the validated
+                grading policy, weight categories,
+                transmutation and quarter rules approved
+                by the school.
+            </p>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,171 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ========================================= -->
+    <!-- PAGE INFORMATION                          -->
+    <!-- ========================================= -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="description"
+        content="EduGuard: Academic and Instructional Monitoring System for Julio R. Hernandez Integrated School."
+    >
+
+    <meta name="theme-color" content="#031b2e">
+
+    <title>
+        EduGuard | Julio R. Hernandez Integrated School
+    </title>
+
+    <!-- Landing Page CSS -->
+    <link
+        rel="stylesheet"
+        href="{% static 'prototype/css/landing.css' %}?v=7"
+    >
+
+</head>
+
+<body>
+
+    <!-- ========================================= -->
+    <!-- EDUGUARD LANDING PAGE                     -->
+    <!-- ========================================= -->
+
+    <main>
+
+        <section
+            class="hero"
+            id="home"
+            aria-labelledby="hero-title"
+        >
+
+            <!-- School Campus Background -->
+            <div
+                class="hero-photo"
+                aria-hidden="true"
+            ></div>
+
+            <!-- Dark Overlay for Text Readability -->
+            <div
+                class="hero-wash"
+                aria-hidden="true"
+            ></div>
+
+
+            <!-- Main Landing Page Layout -->
+            <div class="page-width hero-inner">
+
+                <!-- ================================= -->
+                <!-- LEFT: SYSTEM INFORMATION          -->
+                <!-- ================================= -->
+
+                <div class="hero-copy">
+
+                    <!-- School Name -->
+                    <div class="school-chip">
+
+                        <span
+                            class="chip-dot"
+                            aria-hidden="true"
+                        ></span>
+
+                        JULIO R. HERNANDEZ INTEGRATED SCHOOL
+
+                    </div>
+
+
+                    <!-- System Branding -->
+                    <h1 id="hero-title">
+                        Edu<span>Guard</span>
+                    </h1>
+
+
+                    <!-- Complete System Title -->
+                    <h2>
+                        Academic and Instructional
+                        <br>
+                        Monitoring System
+                    </h2>
+
+
+                    <!-- System Description -->
+                    <p class="hero-description">
+
+                        A unified platform for student performance,
+                        QR attendance, grades monitoring,
+                        early warning, and timely intervention
+                        for a better, brighter school community.
+
+                    </p>
+
+
+                    <!-- Sign In Button -->
+                    <div class="hero-actions">
+
+                        <a
+                            class="primary-action"
+                            href="{% url 'prototype:login' %}"
+                        >
+
+                            <span aria-hidden="true">♙</span>
+
+                            Sign In
+
+                            <span aria-hidden="true">→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- RIGHT: SCHOOL BRANDING           -->
+                <!-- ================================= -->
+
+                <div class="hero-art">
+
+                    <!-- Official School Logo -->
+                    <div class="school-seal">
+
+                        <img
+                            src="{% static 'prototype/images/jrh-school-logo.jpg' %}"
+                            alt="Julio R. Hernandez Integrated School official seal"
+                        >
+
+                    </div>
+
+
+                    <!-- EduGuard Tagline -->
+                    <div class="school-quote">
+
+                        “Every student
+                        <br>
+                        deserves
+                        <br>
+                        a brighter future.”
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

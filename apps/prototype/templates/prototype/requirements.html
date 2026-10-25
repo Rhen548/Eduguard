@@ -1,0 +1,450 @@
+
+{% extends "prototype/base.html" %}
+
+
+{% block heading_actions %}
+
+    <!-- ================================================= -->
+    <!-- PAGE HEADER: ACTION BUTTONS                       -->
+    <!-- ================================================= -->
+
+
+    <!-- Export Sample Requirements CSV -->
+    <button
+        type="button"
+        class="button button-light"
+        data-export="requirements"
+    >
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+        Export sample CSV
+    </button>
+
+
+
+    <!-- Open New Requirement Modal -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-open-modal="requirementModal"
+    >
+        <svg class="icon">
+            <use href="#i-plus"></use>
+        </svg>
+
+        New requirement
+    </button>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: REQUIREMENT SUMMARY CARDS              -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- Total Learning Requirements -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-indigo">
+                <svg class="icon">
+                    <use href="#i-file"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Learning Requirements</small>
+                <strong>24</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Sample Completion Rate -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Sample Completion Rate</small>
+                <strong>78%</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Pending Submissions -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-amber">
+                <svg class="icon">
+                    <use href="#i-clock"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Pending Submissions</small>
+                <strong>31</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: SUBMISSION MONITORING HEADER           -->
+    <!-- ================================================= -->
+
+    <section class="section-head">
+
+        <div>
+
+            <h3>
+                Submission Monitoring
+            </h3>
+
+            <p>
+                Observe sample completion and
+                missing-submission patterns.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: LEARNING REQUIREMENT CARDS             -->
+    <!-- ================================================= -->
+
+    <div class="requirement-grid">
+
+
+        <!-- Loop Through Sample Requirements -->
+        {% for item in requirements %}
+
+
+            <!-- Individual Requirement Card -->
+            <article class="surface-card requirement-card">
+
+
+                <!-- ===================================== -->
+                <!-- REQUIREMENT ICON AND STATUS           -->
+                <!-- ===================================== -->
+
+                <div class="requirement-top">
+
+
+                    <!-- Requirement Icon -->
+                    <span class="req-icon color-indigo">
+
+                        <svg class="icon">
+                            <use href="#i-file"></use>
+                        </svg>
+
+                    </span>
+
+
+
+                    <!-- Requirement Status -->
+                    <span
+                        class="status {% if item.status == 'Closed' %}status-low{% elif item.status == 'Due soon' %}status-moderate{% else %}status-review{% endif %}"
+                    >
+                        {{ item.status }}
+                    </span>
+
+                </div>
+
+
+
+                <!-- ===================================== -->
+                <!-- REQUIREMENT INFORMATION               -->
+                <!-- ===================================== -->
+
+
+                <!-- Requirement Title -->
+                <h3>
+                    {{ item.title }}
+                </h3>
+
+
+
+                <!-- Subject and Requirement Type -->
+                <p>
+                    {{ item.subject }}
+
+                    <span>·</span>
+
+                    {{ item.type }}
+                </p>
+
+
+
+                <!-- ===================================== -->
+                <!-- SUBMISSION PROGRESS                   -->
+                <!-- ===================================== -->
+
+                <div class="req-progress-title">
+
+
+                    <!-- Progress Label -->
+                    <span>
+                        Submission progress
+                    </span>
+
+
+
+                    <!-- Submitted and Total Students -->
+                    <strong>
+                        {{ item.submitted }}/{{ item.total }}
+                    </strong>
+
+                </div>
+
+
+
+                <!-- Submission Progress Bar -->
+                <div class="progress">
+
+                    <span
+                        style="width:{{ item.progress }}%"
+                    ></span>
+
+                </div>
+
+
+
+                <!-- ===================================== -->
+                <!-- REQUIREMENT FOOTER                    -->
+                <!-- ===================================== -->
+
+                <div class="requirement-footer">
+
+
+                    <!-- Requirement Due Date -->
+                    <span>
+
+                        <svg class="icon">
+                            <use href="#i-calendar"></use>
+                        </svg>
+
+                        Due {{ item.due }}
+
+                    </span>
+
+
+
+                    <!-- View Requirement Details -->
+                    <button
+                        type="button"
+                        class="button-link"
+                        data-toast="Submission list preview only — no database is connected."
+                    >
+                        Details →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        {% endfor %}
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 4: REQUIREMENT SCOPE INFORMATION          -->
+    <!-- ================================================= -->
+
+    <div class="info-strip">
+
+
+        <!-- Requirement Information Icon -->
+        <svg class="icon">
+            <use href="#i-file"></use>
+        </svg>
+
+
+
+        <!-- Requirement Scope Explanation -->
+        <div>
+
+            <strong>
+                Learning requirement scope
+            </strong>
+
+            <p>
+                This page demonstrates tracking assignments
+                and submitted student work. It is separate
+                from the teacher lesson-plan monitoring module.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 5: CREATE REQUIREMENT MODAL               -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal-backdrop"
+        id="requirementModal"
+        hidden
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reqModalTitle"
+        >
+
+
+            <!-- ========================================= -->
+            <!-- MODAL HEADER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-header">
+
+
+                <!-- Modal Title -->
+                <h3 id="reqModalTitle">
+                    Create Requirement — Preview
+                </h3>
+
+
+
+                <!-- Close Modal Button -->
+                <button
+                    class="modal-close"
+                    type="button"
+                    data-close-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL BODY                                -->
+            <!-- ========================================= -->
+
+            <div class="modal-body">
+
+
+                <!-- Requirement Title Input -->
+                <label class="form-label">
+
+                    Title
+
+                    <input
+                        class="text-input"
+                        type="text"
+                        id="requirementDemoTitle"
+                        placeholder="e.g., Chapter 2 Reflection"
+                    >
+
+                </label>
+
+
+
+                <!-- Subject Selection -->
+                <label class="form-label">
+
+                    Subject
+
+                    <select class="select-input full-width">
+
+                        <option>Mathematics 8</option>
+                        <option>Science 9</option>
+                        <option>English 7</option>
+
+                    </select>
+
+                </label>
+
+
+
+                <!-- Due Date Input -->
+                <label class="form-label">
+
+                    Due date
+
+                    <input
+                        class="text-input"
+                        type="date"
+                    >
+
+                </label>
+
+
+
+                <!-- Prototype Disclaimer -->
+                <p class="modal-tip">
+                    This form demonstrates the future workflow.
+                    It will not create a database record yet.
+                </p>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL FOOTER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-footer">
+
+
+                <!-- Cancel Button -->
+                <button
+                    type="button"
+                    class="button button-light"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+
+                <!-- Preview Requirement Creation -->
+                <button
+                    class="button button-primary"
+                    type="button"
+                    data-demo-submit="requirement"
+                >
+                    Preview creation
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

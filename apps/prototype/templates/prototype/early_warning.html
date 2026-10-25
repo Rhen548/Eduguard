@@ -1,0 +1,378 @@
+
+{% extends "prototype/base.html" %}
+
+
+<!-- ===================================================== -->
+<!-- PAGE HEADER ACTION BUTTON                             -->
+<!-- ===================================================== -->
+
+{% block heading_actions %}
+
+    <!-- Navigate to Intervention Management -->
+    <a
+        href="{% url 'prototype:interventions' %}?role={{ role }}"
+        class="button button-primary"
+    >
+        <svg class="icon">
+            <use href="#i-heart"></use>
+        </svg>
+
+        View interventions
+    </a>
+
+{% endblock %}
+
+
+
+<!-- ===================================================== -->
+<!-- MAIN EARLY WARNING PAGE CONTENT                       -->
+<!-- ===================================================== -->
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: AI EARLY WARNING DISCLAIMER            -->
+    <!-- ================================================= -->
+
+    <div class="warning-disclaimer">
+
+        <!-- Decorative icon -->
+        <span class="warning-disclaimer-icon">
+            ✧
+        </span>
+
+        <!-- Disclaimer information -->
+        <div>
+
+            <strong>
+                AI-assisted early warning — interface demonstration
+            </strong>
+
+            <p>
+                These are fictional, illustrative indicators,
+                not AI predictions. The final system will require
+                validated detection rules or an evaluated model
+                and human review before decisions.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: RISK SUMMARY CARDS                     -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- High Risk Students -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-red">
+                <svg class="icon">
+                    <use href="#i-alert"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>High Risk (sample list)</small>
+                <strong>3</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Moderate Risk Students -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-amber">
+                <svg class="icon">
+                    <use href="#i-clock"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Moderate Risk (sample list)</small>
+                <strong>2</strong>
+            </div>
+
+        </div>
+
+
+
+        <!-- Students Requiring Human Review -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+                <small>Requires Human Review</small>
+                <strong>5</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: STUDENTS REQUIRING ATTENTION           -->
+    <!-- ================================================= -->
+
+    <section class="section-head">
+
+
+        <!-- Section title and description -->
+        <div>
+
+            <h3>
+                Students Requiring Attention
+            </h3>
+
+            <p>
+                Sample reasons are shown clearly to help
+                teachers and guidance staff decide what to review.
+            </p>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- RISK LEVEL FILTER BUTTONS                     -->
+        <!-- ============================================= -->
+
+        <div
+            class="filter-chips"
+            data-chip-group="warning-list"
+        >
+
+            <!-- Show all students -->
+            <button
+                type="button"
+                class="chip active"
+                data-chip-value=""
+            >
+                All (5)
+            </button>
+
+
+            <!-- Show high-risk students -->
+            <button
+                type="button"
+                class="chip"
+                data-chip-value="High"
+            >
+                High (3)
+            </button>
+
+
+            <!-- Show moderate-risk students -->
+            <button
+                type="button"
+                class="chip"
+                data-chip-value="Moderate"
+            >
+                Moderate (2)
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 4: STUDENT RISK CARDS                     -->
+    <!-- ================================================= -->
+
+    <div
+        class="risk-grid"
+        id="warning-list"
+    >
+
+
+        <!-- Loop through sample warning records -->
+        {% for warning in warnings %}
+
+
+            <!-- Individual student risk card -->
+            <article
+                class="surface-card risk-card"
+                data-risk="{{ warning.risk }}"
+            >
+
+
+                <!-- ===================================== -->
+                <!-- STUDENT INFORMATION                   -->
+                <!-- ===================================== -->
+
+                <div class="risk-head">
+
+
+                    <!-- Student avatar -->
+                    <span class="avatar avatar-{{ forloop.counter }}">
+                        {{ warning.initials }}
+                    </span>
+
+
+                    <!-- Student name, grade and ID -->
+                    <div>
+
+                        <h3>
+                            {{ warning.name }}
+                        </h3>
+
+                        <p>
+                            {{ warning.grade }} · {{ warning.id }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- Student risk level -->
+                    <span class="status status-{{ warning.risk|lower }}">
+                        {{ warning.risk }} risk
+                    </span>
+
+                </div>
+
+
+
+                <!-- ===================================== -->
+                <!-- STUDENT ACADEMIC METRICS              -->
+                <!-- ===================================== -->
+
+                <div class="risk-mini-metrics">
+
+
+                    <!-- Grade average -->
+                    <div>
+
+                        <span>
+                            Grade average
+                        </span>
+
+                        <strong>
+                            {{ warning.average }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Attendance rate -->
+                    <div>
+
+                        <span>
+                            Attendance rate
+                        </span>
+
+                        <strong>
+                            {{ warning.attendance }}%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ===================================== -->
+                <!-- EXAMPLE STUDENT CONCERN               -->
+                <!-- ===================================== -->
+
+                <div class="risk-reason">
+
+                    <strong>
+
+                        <svg class="icon">
+                            <use href="#i-alert"></use>
+                        </svg>
+
+                        Example concern
+
+                    </strong>
+
+                    <p>
+                        {{ warning.reason }}
+                    </p>
+
+                </div>
+
+
+
+                <!-- ===================================== -->
+                <!-- SUGGESTED ACTION AND INTERVENTION     -->
+                <!-- ===================================== -->
+
+                <div class="risk-foot">
+
+
+                    <!-- Suggested review action -->
+                    <span>
+                        Suggested review: {{ warning.action }}
+                    </span>
+
+
+                    <!-- Navigate to Intervention Management -->
+                    <a
+                        href="{% url 'prototype:interventions' %}?role={{ role }}"
+                    >
+                        Intervene →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        {% endfor %}
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 5: FINAL SYSTEM INFORMATION              -->
+    <!-- ================================================= -->
+
+    <div class="info-strip">
+
+
+        <!-- Brain icon -->
+        <svg class="icon">
+            <use href="#i-brain"></use>
+        </svg>
+
+
+        <!-- Explanation of future implementation -->
+        <div>
+
+            <strong>
+                How this can work in the final system
+            </strong>
+
+            <p>
+                After stakeholder validation, academic grades
+                and attendance trends may contribute to
+                explainable indicators. Flags are prompts
+                for supportive follow-up, not automatic
+                labels or disciplinary actions.
+            </p>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

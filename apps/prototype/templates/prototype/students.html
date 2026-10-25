@@ -1,0 +1,612 @@
+
+{% extends "prototype/base.html" %}
+
+
+{% block heading_actions %}
+
+    <!-- ================================================= -->
+    <!-- PAGE HEADER: ACTION BUTTONS                       -->
+    <!-- ================================================= -->
+
+
+    <!-- Import Student List (Preview Only) -->
+    <button
+        type="button"
+        class="button button-light"
+        data-toast="Student import is planned for the full system."
+    >
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+        Import list
+    </button>
+
+
+
+    <!-- Add Student (Preview Only) -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-toast="Adding students will be enabled when the database is connected."
+    >
+        <svg class="icon">
+            <use href="#i-plus"></use>
+        </svg>
+
+        Add student
+    </button>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: STUDENT SUMMARY CARDS                  -->
+    <!-- ================================================= -->
+
+    <div class="metric-grid metric-grid-three">
+
+
+        <!-- Total Students -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-indigo">
+                <svg class="icon">
+                    <use href="#i-users"></use>
+                </svg>
+            </span>
+
+            <div>
+
+                <small>
+                    Total Students
+                    <em>school-wide sample</em>
+                </small>
+
+                <strong>
+                    1,248
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Students with Regular Standing -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-teal">
+                <svg class="icon">
+                    <use href="#i-check"></use>
+                </svg>
+            </span>
+
+            <div>
+
+                <small>
+                    Regular Standing
+                </small>
+
+                <strong>
+                    1,186
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Students Needing Attention -->
+        <div class="compact-metric">
+
+            <span class="compact-icon color-amber">
+                <svg class="icon">
+                    <use href="#i-alert"></use>
+                </svg>
+            </span>
+
+            <div>
+
+                <small>
+                    Needs Attention
+                </small>
+
+                <strong>
+                    62
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: STUDENT RECORDS TABLE                  -->
+    <!-- ================================================= -->
+
+    <div class="surface-card table-card">
+
+
+        <!-- ============================================= -->
+        <!-- TABLE HEADER                                  -->
+        <!-- ============================================= -->
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Student Records
+
+                    <span class="count-pill">
+                        12 sample profiles
+                    </span>
+                </h3>
+
+                <p>
+                    Search by name or student ID.
+                    Select a profile for details.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- SEARCH AND FILTER CONTROLS                    -->
+        <!-- ============================================= -->
+
+        <div class="toolbar">
+
+
+            <!-- Search by Student Name or ID -->
+            <label class="search-field">
+
+                <svg class="icon">
+                    <use href="#i-search"></use>
+                </svg>
+
+                <input
+                    data-filter-search="studentTable"
+                    placeholder="Search by name or student ID..."
+                    aria-label="Search students"
+                >
+
+            </label>
+
+
+
+            <!-- Filter Students by Grade Level -->
+            <select
+                class="select-input"
+                data-filter-select="studentTable"
+                data-filter-field="grade"
+                aria-label="Filter grade"
+            >
+
+                <option value="">
+                    All grade levels
+                </option>
+
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+
+            </select>
+
+
+
+            <!-- Filter Students by Risk Level -->
+            <select
+                class="select-input"
+                data-filter-select="studentTable"
+                data-filter-field="risk"
+                aria-label="Filter risk"
+            >
+
+                <option value="">
+                    All risk levels
+                </option>
+
+                <option>Low</option>
+                <option>Moderate</option>
+                <option>High</option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- STUDENT DATA TABLE                            -->
+        <!-- ============================================= -->
+
+        <div class="table-overflow">
+
+            <table
+                class="data-table"
+                id="studentTable"
+            >
+
+
+                <!-- Table Column Headings -->
+                <thead>
+
+                    <tr>
+                        <th>STUDENT</th>
+                        <th>STUDENT ID</th>
+                        <th>CLASS / SECTION</th>
+                        <th>AVERAGE GRADE</th>
+                        <th>ATTENDANCE</th>
+                        <th>RISK LEVEL</th>
+                        <th>DETAILS</th>
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- ===================================== -->
+                <!-- STUDENT RECORDS FROM DJANGO           -->
+                <!-- ===================================== -->
+
+                <tbody>
+
+
+                    <!-- Loop Through Sample Students -->
+                    {% for student in students %}
+
+
+                        <!-- Individual Student Row -->
+                        <tr
+                            data-grade="{{ student.grade }}"
+                            data-risk="{{ student.risk }}"
+                            data-search="{{ student.name|lower }} {{ student.id|lower }}"
+                        >
+
+
+                            <!-- Student Name and Avatar -->
+                            <td>
+
+                                <span class="table-person">
+
+
+                                    <!-- Student Initials -->
+                                    <span class="avatar avatar-{{ forloop.counter|default:1 }}">
+                                        {{ student.initials }}
+                                    </span>
+
+
+
+                                    <!-- Student Full Name -->
+                                    <strong>
+                                        {{ student.name }}
+                                    </strong>
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- Student ID -->
+                            <td class="secondary-td">
+                                {{ student.id }}
+                            </td>
+
+
+
+                            <!-- Grade Level and Section -->
+                            <td>
+                                Grade {{ student.grade }} – {{ student.section }}
+                            </td>
+
+
+
+                            <!-- Average Grade -->
+                            <td>
+
+                                <strong>
+                                    {{ student.average }}
+                                </strong>
+
+                                <span class="secondary-td">
+                                    / 100
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- Attendance Rate -->
+                            <td>
+                                {{ student.attendance }}%
+                            </td>
+
+
+
+                            <!-- Student Risk Level -->
+                            <td>
+
+                                <span class="status status-{{ student.risk|lower }}">
+                                    {{ student.risk }}
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- View Student Profile Button -->
+                            <td>
+
+                                <button
+                                    type="button"
+                                    class="button-link"
+                                    data-profile
+                                    data-name="{{ student.name }}"
+                                    data-id="{{ student.id }}"
+                                    data-class="Grade {{ student.grade }} – {{ student.section }}"
+                                    data-average="{{ student.average }}"
+                                    data-attendance="{{ student.attendance }}"
+                                    data-risk="{{ student.risk }}"
+                                >
+                                    View
+
+                                    <span>→</span>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+
+            <!-- Message When No Students Match the Filters -->
+            <div
+                class="empty-state"
+                data-empty-for="studentTable"
+                hidden
+            >
+                No matching student records.
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- TABLE FOOTER                                  -->
+        <!-- ============================================= -->
+
+        <div class="table-bottom">
+
+            Showing
+
+            <strong data-visible-count="studentTable">
+                12
+            </strong>
+
+            example students
+
+            <span>
+                For illustration only • Not real school records
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: STUDENT PROFILE MODAL                  -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal-backdrop"
+        id="profileModal"
+        hidden
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="profileTitle"
+        >
+
+
+            <!-- ========================================= -->
+            <!-- MODAL HEADER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-header">
+
+
+                <!-- Modal Title -->
+                <h3 id="profileTitle">
+                    Student Profile Preview
+                </h3>
+
+
+
+                <!-- Close Modal Button -->
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL BODY                                -->
+            <!-- ========================================= -->
+
+            <div class="modal-body">
+
+
+                <!-- ===================================== -->
+                <!-- STUDENT PROFILE HEADER                -->
+                <!-- ===================================== -->
+
+                <div class="modal-hero">
+
+
+                    <!-- Student Avatar -->
+                    <span
+                        class="avatar avatar-large"
+                        id="profileAvatar"
+                    >
+                        AR
+                    </span>
+
+
+
+                    <!-- Student Name and ID -->
+                    <div>
+
+                        <h3 id="profileName">
+                            Student name
+                        </h3>
+
+                        <p id="profileId">
+                            EDG-1001
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ===================================== -->
+                <!-- STUDENT PROFILE DETAILS               -->
+                <!-- ===================================== -->
+
+                <div class="profile-details">
+
+
+                    <!-- Class and Section -->
+                    <div>
+
+                        <small>
+                            Class / section
+                        </small>
+
+                        <strong id="profileClass"></strong>
+
+                    </div>
+
+
+
+                    <!-- Grade Average -->
+                    <div>
+
+                        <small>
+                            Grade average
+                        </small>
+
+                        <strong id="profileAverage"></strong>
+
+                    </div>
+
+
+
+                    <!-- Attendance Rate -->
+                    <div>
+
+                        <small>
+                            Attendance rate
+                        </small>
+
+                        <strong id="profileAttendance"></strong>
+
+                    </div>
+
+
+
+                    <!-- Monitoring Level -->
+                    <div>
+
+                        <small>
+                            Monitoring level
+                        </small>
+
+                        <strong id="profileRisk"></strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Prototype Disclaimer -->
+                <p class="modal-tip">
+                    This is a sample profile.
+                    Student-specific academic history will
+                    connect here during full development.
+                </p>
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!-- MODAL FOOTER                              -->
+            <!-- ========================================= -->
+
+            <div class="modal-footer">
+
+
+                <!-- Close Profile Modal -->
+                <button
+                    type="button"
+                    class="button button-light"
+                    data-close-modal
+                >
+                    Close
+                </button>
+
+
+
+                <!-- Navigate to Early Warning Page -->
+                <a
+                    href="{% url 'prototype:early_warning' %}?role={{ role }}"
+                    class="button button-primary"
+                >
+                    View risk insights
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

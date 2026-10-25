@@ -1,0 +1,591 @@
+
+{% extends "prototype/base.html" %}
+
+
+<!-- ===================================================== -->
+<!-- PAGE HEADER ACTION BUTTONS                            -->
+<!-- ===================================================== -->
+
+{% block heading_actions %}
+
+    <!-- Export attendance records -->
+    <button
+        type="button"
+        class="button button-light"
+        data-export="attendance"
+    >
+        <svg class="icon">
+            <use href="#i-down"></use>
+        </svg>
+
+        Export sample CSV
+    </button>
+
+    <!-- Open QR attendance simulation -->
+    <button
+        type="button"
+        class="button button-primary"
+        data-open-modal="scanModal"
+    >
+        <svg class="icon">
+            <use href="#i-scan"></use>
+        </svg>
+
+        Demo QR scan
+    </button>
+
+{% endblock %}
+
+
+
+<!-- ===================================================== -->
+<!-- MAIN ATTENDANCE PAGE CONTENT                          -->
+<!-- ===================================================== -->
+
+{% block content %}
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 1: ATTENDANCE SUMMARY CARDS               -->
+    <!-- ================================================= -->
+
+    <section class="metric-grid">
+
+        <!-- Registered Students -->
+        <div class="metric-card">
+
+            <div class="metric-top">
+                <span>Registered Students</span>
+
+                <span class="metric-icon color-indigo">
+                    <svg class="icon">
+                        <use href="#i-users"></use>
+                    </svg>
+                </span>
+            </div>
+
+            <strong class="metric-number">1,248</strong>
+
+            <div class="metric-bottom">
+                School-wide sample
+            </div>
+
+        </div>
+
+
+        <!-- Present Today -->
+        <div class="metric-card">
+
+            <div class="metric-top">
+                <span>Present Today</span>
+
+                <span class="metric-icon color-teal">
+                    <svg class="icon">
+                        <use href="#i-check"></use>
+                    </svg>
+                </span>
+            </div>
+
+            <strong class="metric-number">1,136</strong>
+
+            <div class="metric-bottom">
+                91.0% of students
+            </div>
+
+        </div>
+
+
+        <!-- Late Arrivals -->
+        <div class="metric-card">
+
+            <div class="metric-top">
+                <span>Late Arrivals</span>
+
+                <span class="metric-icon color-amber">
+                    <svg class="icon">
+                        <use href="#i-clock"></use>
+                    </svg>
+                </span>
+            </div>
+
+            <strong class="metric-number">44</strong>
+
+            <div class="metric-bottom">
+                3.5% of students
+            </div>
+
+        </div>
+
+
+        <!-- Absent Today -->
+        <div class="metric-card">
+
+            <div class="metric-top">
+                <span>Absent Today</span>
+
+                <span class="metric-icon color-red">
+                    <svg class="icon">
+                        <use href="#i-alert"></use>
+                    </svg>
+                </span>
+            </div>
+
+            <strong class="metric-number">68</strong>
+
+            <div class="metric-bottom">
+                5.5% of students
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 2: DAILY ATTENDANCE AND SMS PREVIEW       -->
+    <!-- ================================================= -->
+
+    <div class="two-column-main attendance-extra">
+
+
+        <!-- Daily Attendance Summary -->
+        <div class="surface-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Daily Attendance Summary</h3>
+
+                    <p>
+                        Example status distribution for today
+                    </p>
+                </div>
+
+                <span class="mini-pill">
+                    Oct 13, 2026
+                </span>
+
+            </div>
+
+
+            <!-- Attendance percentages -->
+            <div class="horizontal-stats">
+
+
+                <!-- Present percentage -->
+                <div>
+
+                    <div>
+                        <strong>Present</strong>
+                        <span>91.0%</span>
+                    </div>
+
+                    <div class="progress">
+                        <span
+                            style="width:91%;background:#2fb9a8"
+                        ></span>
+                    </div>
+
+                </div>
+
+
+                <!-- Late percentage -->
+                <div>
+
+                    <div>
+                        <strong>Late</strong>
+                        <span>3.5%</span>
+                    </div>
+
+                    <div class="progress">
+                        <span
+                            style="width:3.5%;background:#f8b867"
+                        ></span>
+                    </div>
+
+                </div>
+
+
+                <!-- Absent percentage -->
+                <div>
+
+                    <div>
+                        <strong>Absent</strong>
+                        <span>5.5%</span>
+                    </div>
+
+                    <div class="progress">
+                        <span
+                            style="width:5.5%;background:#ed7582"
+                        ></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Guardian SMS Preview -->
+        <div class="surface-card sms-preview">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Guardian SMS Preview</h3>
+
+                    <p>
+                        Example of a future automated notification
+                    </p>
+                </div>
+
+                <span class="status status-moderate">
+                    Simulation
+                </span>
+
+            </div>
+
+
+            <!-- Sample SMS message -->
+            <div class="sms-bubble">
+                EduGuard Alert: Your child (Sample Student) was
+                marked ABSENT on Oct 13, 2026.
+                Please contact the school for concerns.
+            </div>
+
+
+            <!-- SMS disclaimer -->
+            <p class="small-muted">
+                No SMS will be sent.
+                Sending requires an SMS provider and guardian
+                consent/privacy safeguards in the final system.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 3: STUDENT ATTENDANCE LOG                 -->
+    <!-- ================================================= -->
+
+    <div class="surface-card table-card">
+
+
+        <!-- Table heading -->
+        <div class="card-header">
+
+            <div>
+                <h3>Student Attendance Log</h3>
+
+                <p>
+                    Example time-in and time-out records
+                </p>
+            </div>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- SEARCH AND FILTER CONTROLS                    -->
+        <!-- ============================================= -->
+
+        <div class="toolbar">
+
+
+            <!-- Search by student name or ID -->
+            <label class="search-field">
+
+                <svg class="icon">
+                    <use href="#i-search"></use>
+                </svg>
+
+                <input
+                    data-filter-search="attendanceTable"
+                    placeholder="Search student or ID..."
+                    aria-label="Search attendance"
+                >
+
+            </label>
+
+
+
+            <!-- Filter by attendance status -->
+            <select
+                class="select-input"
+                data-filter-select="attendanceTable"
+                data-filter-field="status"
+                aria-label="Attendance status"
+            >
+
+                <option value="">All statuses</option>
+                <option>Present</option>
+                <option>Late</option>
+                <option>Absent</option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- ATTENDANCE RECORDS TABLE                      -->
+        <!-- ============================================= -->
+
+        <div class="table-overflow">
+
+            <table
+                class="data-table"
+                id="attendanceTable"
+            >
+
+                <!-- Table column headings -->
+                <thead>
+
+                    <tr>
+                        <th>STUDENT</th>
+                        <th>ID</th>
+                        <th>GRADE / SECTION</th>
+                        <th>TIME IN</th>
+                        <th>TIME OUT</th>
+                        <th>STATUS</th>
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- Student attendance records -->
+                <tbody>
+
+                    {% for rec in records %}
+
+                        <tr
+                            data-status="{{ rec.status }}"
+                            data-search="{{ rec.name|lower }} {{ rec.id|lower }}"
+                        >
+
+                            <!-- Student name and avatar -->
+                            <td>
+
+                                <span class="table-person">
+
+                                    <span class="avatar avatar-{{ forloop.counter }}">
+                                        {{ rec.initials }}
+                                    </span>
+
+                                    <strong>
+                                        {{ rec.name }}
+                                    </strong>
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- Student ID -->
+                            <td class="secondary-td">
+                                {{ rec.id }}
+                            </td>
+
+
+                            <!-- Grade and section -->
+                            <td>
+                                {{ rec.grade }} – {{ rec.section }}
+                            </td>
+
+
+                            <!-- Time in -->
+                            <td>
+                                {{ rec.time_in }}
+                            </td>
+
+
+                            <!-- Time out -->
+                            <td>
+                                {{ rec.time_out }}
+                            </td>
+
+
+                            <!-- Attendance status -->
+                            <td>
+
+                                <span class="status status-{{ rec.status|lower }}">
+                                    {{ rec.status }}
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+
+            <!-- Message when no matching records are found -->
+            <div
+                class="empty-state"
+                data-empty-for="attendanceTable"
+                hidden
+            >
+                No matching attendance logs.
+            </div>
+
+        </div>
+
+
+
+        <!-- Table footer -->
+        <div class="table-bottom">
+
+            Showing
+
+            <strong data-visible-count="attendanceTable">
+                8
+            </strong>
+
+            example records
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECTION 4: QR ATTENDANCE SIMULATION MODAL         -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal-backdrop"
+        id="scanModal"
+        hidden
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="scanTitle"
+        >
+
+
+            <!-- Modal heading -->
+            <div class="modal-header">
+
+                <h3 id="scanTitle">
+                    Simulate QR Attendance
+                </h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    data-close-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+
+                <!-- QR scan demonstration information -->
+                <div class="scan-preview">
+
+                    <svg class="icon">
+                        <use href="#i-scan"></use>
+                    </svg>
+
+                    <strong>
+                        QR scan demonstration
+                    </strong>
+
+                    <p>
+                        Enter an example ID instead of using a camera.
+                        The result is displayed in the browser only.
+                    </p>
+
+                </div>
+
+
+
+                <!-- Student ID input -->
+                <label
+                    class="form-label"
+                    for="scanStudentId"
+                >
+                    Example student ID
+                </label>
+
+                <input
+                    class="text-input"
+                    type="text"
+                    id="scanStudentId"
+                    value="EDG-1001"
+                    placeholder="e.g. EDG-1001"
+                >
+
+
+                <!-- Example IDs -->
+                <p class="input-hint">
+                    Try EDG-1001, EDG-1004 or EDG-1012.
+                </p>
+
+
+
+                <!-- Scan result feedback -->
+                <div
+                    id="scanFeedback"
+                    class="scan-feedback"
+                    hidden
+                ></div>
+
+            </div>
+
+
+
+            <!-- Modal footer buttons -->
+            <div class="modal-footer">
+
+                <!-- Close modal -->
+                <button
+                    type="button"
+                    class="button button-light"
+                    data-close-modal
+                >
+                    Close
+                </button>
+
+
+                <!-- Simulate student time-in -->
+                <button
+                    type="button"
+                    class="button button-primary"
+                    id="simulateScan"
+                >
+                    Simulate time-in
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

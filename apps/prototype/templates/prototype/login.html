@@ -1,0 +1,442 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Welcome · EduGuard Prototype</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'prototype/css/app.css' %}?v=3">
+
+    <!-- JavaScript -->
+    <script src="{% static 'prototype/js/app.js' %}?v=4" defer></script>
+</head>
+
+<body class="login-body">
+
+    <div class="login-layout">
+
+        <!-- ========================================= -->
+        <!-- LEFT SIDE: EDUGUARD INTRODUCTION          -->
+        <!-- ========================================= -->
+
+        <section class="login-showcase">
+
+            <!-- Background decorations -->
+            <div class="login-glow login-glow-a"></div>
+            <div class="login-glow login-glow-b"></div>
+
+            <!-- EduGuard logo -->
+            <div class="login-brand">
+
+                <span class="login-brand-icon">✧</span>
+
+                <strong>
+                    Edu<span>Guard</span>
+                </strong>
+
+            </div>
+
+
+            <!-- Main introduction -->
+            <div class="showcase-copy">
+
+                <div class="showcase-pill">
+                    ✦ A smarter view of student success
+                </div>
+
+                <h1>
+                    Every student deserves a
+                    <em>brighter future.</em>
+                </h1>
+
+                <p>
+                    Unify student performance, QR attendance,
+                    academic monitoring, and timely intervention
+                    in one thoughtful platform.
+                </p>
+
+
+                
+<!-- ========================================= -->
+<!-- EDUGUARD PLATFORM OVERVIEW                -->
+<!-- ========================================= -->
+
+<div class="showcase-stats">
+
+    <!-- One Unified Platform -->
+    <div>
+        <strong>01</strong>
+        <span>Unified Platform</span>
+    </div>
+
+    <!-- Twelve Connected Prototype Screens -->
+    <div>
+        <strong>12</strong>
+        <span>Connected Screens</span>
+    </div>
+
+    <!-- Three Role-Based Workspaces -->
+    <div>
+        <strong>03</strong>
+        <span>Role-Based Workspaces</span>
+    </div>
+
+</div>
+
+
+                
+
+            </div>
+
+
+            <!-- School information -->
+            <div class="showcase-foot">
+
+                Julio R. Hernandez Integrated School
+
+                <span>·</span>
+
+                A capstone concept for better school operations
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================= -->
+        <!-- RIGHT SIDE: DEMO LOGIN                    -->
+        <!-- ========================================= -->
+
+        <section class="login-form-side">
+
+            <div class="login-form-wrap">
+
+
+                
+
+
+
+                <!-- Welcome heading -->
+                <h2>Welcome to EduGuard</h2>
+
+                <p class="login-desc">
+                    Explore a fully navigable demonstration.
+                    Enter demo credentials and choose a role
+                    below to preview the experience.
+                </p>
+
+
+
+                <!-- ================================= -->
+                <!-- USERNAME AND PASSWORD FIELDS      -->
+                <!-- ================================= -->
+
+                <!-- Form blocks navigation until both fields are valid -->
+                <form id="demoLoginForm" action="{% url 'prototype:dashboard' %}" method="get" novalidate>
+
+                <div class="demo-login-fields">
+
+
+                    <!-- Username -->
+                    <label for="demoUsername">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="demoUsername"
+                        name="username"
+                        placeholder="Enter any demo username"
+                        autocomplete="username"
+                        required
+                    >
+
+
+
+                    <!-- Password -->
+                    <label for="demoPassword">
+                        Password
+                    </label>
+
+                    <div class="demo-password-wrap">
+
+                        <input
+                            type="password"
+                            id="demoPassword"
+                            name="password"
+                            placeholder="Enter any demo password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <!-- Show or hide password -->
+                        <button
+                            type="button"
+                            class="demo-password-toggle"
+                            id="toggleDemoPassword"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+
+
+                   
+<!-- ========================================= -->
+<!-- REMEMBER ME AND FORGOT PASSWORD           -->
+<!-- ========================================= -->
+
+<div class="login-options">
+
+    <!-- Remember Demo Username and Role -->
+    <label class="remember-me">
+
+        <input
+            type="checkbox"
+            id="rememberMe"
+        >
+
+        <span>Remember me</span>
+
+    </label>
+
+
+   
+<!-- Forgot Password Page Link -->
+<a
+    href="{% url 'prototype:forgot_password' %}"
+    class="forgot-password"
+>
+    Forgot password?
+</a>
+
+
+</div>
+
+
+<!-- Demo Login Information -->
+<small>
+    Demo login only. Any username and password
+    are accepted.
+</small>
+
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- ROLE SELECTION                    -->
+                <!-- ================================= -->
+
+                <p class="field-label">
+                    Select your demo workspace
+                </p>
+
+
+
+                <!-- AVAILABLE USER ROLES -->
+                <div class="role-choices">
+
+
+                    <!-- Administrator -->
+                    <label class="role-choice selected">
+
+                        <input
+                            type="radio"
+                            name="demo_role"
+                            value="admin"
+                            checked
+                        >
+
+                        <span class="role-choice-icon">
+                            A
+                        </span>
+
+                        <span class="role-choice-copy">
+
+                            <strong>Administrator</strong>
+
+                            <small>
+                                School-wide insights &amp; oversight
+                            </small>
+
+                        </span>
+
+                        <span class="radio-ring"></span>
+
+                    </label>
+
+
+
+                    <!-- Teacher -->
+                    <label class="role-choice">
+
+                        <input
+                            type="radio"
+                            name="demo_role"
+                            value="teacher"
+                        >
+
+                        <span
+                            class="role-choice-icon"
+                            style="--role-bg:#ecfdf6;--role-fg:#13977e"
+                        >
+                            T
+                        </span>
+
+                        <span class="role-choice-copy">
+
+                            <strong>Teacher</strong>
+
+                            <small>
+                                Classes, grades &amp; learning plans
+                            </small>
+
+                        </span>
+
+                        <span class="radio-ring"></span>
+
+                    </label>
+
+
+
+                    <!-- Guidance Staff -->
+                    <label class="role-choice">
+
+                        <input
+                            type="radio"
+                            name="demo_role"
+                            value="guidance"
+                        >
+
+                        <span
+                            class="role-choice-icon"
+                            style="--role-bg:#fff4eb;--role-fg:#d47a36"
+                        >
+                            G
+                        </span>
+
+                        <span class="role-choice-copy">
+
+                            <strong>Guidance Staff</strong>
+
+                            <small>
+                                Early warning &amp; interventions
+                            </small>
+
+                        </span>
+
+                        <span class="radio-ring"></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- ================================= -->
+                <!-- LOGIN DEMO WORKSPACE BUTTON       -->
+                <!-- ================================= -->
+
+                <button
+                    type="submit"
+                    id="enterDemo"
+                    class="button button-primary login-enter"
+                    data-dashboard-url="{% url 'prototype:dashboard' %}"
+                >
+                    Login as selected role
+                    <span>→</span>
+                </button>
+
+                </form>
+
+
+
+                <!-- ================================= -->
+                <!-- PROTOTYPE NOTICE                  -->
+                <!-- ================================= -->
+
+                <div class="login-note">
+
+                    <strong>
+                        ⓘ Prototype notice
+                    </strong>
+
+                    <p>
+                        Demo credentials are not authenticated
+                        or saved. Data and actions shown are
+                        sample previews and are not yet
+                        connected to the database.
+                    </p>
+
+                </div>
+
+
+
+                <!-- Footer -->
+                <div class="login-bottom">
+
+                    Designed as a code-based prototype,
+                    ready for later development.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- ============================================= -->
+    <!-- DEMO PASSWORD VISIBILITY SCRIPT               -->
+    <!-- ============================================= -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const passwordInput = document.getElementById("demoPassword");
+            const toggleButton = document.getElementById("toggleDemoPassword");
+
+            if (passwordInput && toggleButton) {
+
+                toggleButton.addEventListener("click", function () {
+
+                    const isHidden = passwordInput.type === "password";
+
+                    passwordInput.type = isHidden ? "text" : "password";
+
+                    toggleButton.textContent = isHidden ? "Hide" : "Show";
+
+                    toggleButton.setAttribute(
+                        "aria-label",
+                        isHidden ? "Hide password" : "Show password"
+                    );
+
+                    toggleButton.setAttribute(
+                        "aria-pressed",
+                        String(isHidden)
+                    );
+
+                });
+
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
